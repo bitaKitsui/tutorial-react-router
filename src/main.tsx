@@ -9,7 +9,7 @@ import {
 } from "./routes/root.tsx";
 import { ErrorPage } from "./ErrorPage.tsx";
 import { Contact, loader as contactLoader } from "./routes/Contact.tsx";
-import { Edit } from "./routes/Edit.tsx";
+import { Edit, action as editAction } from "./routes/Edit.tsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +28,7 @@ const router = createBrowserRouter([
         path: "contacts/:contactId/edit",
         element: <Edit />,
         loader: contactLoader,
+        action: editAction,
       },
     ],
   },

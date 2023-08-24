@@ -1,5 +1,13 @@
 import { type FC } from "react";
-import { Form, useLoaderData } from "react-router-dom";
+import { Form, redirect, useLoaderData } from "react-router-dom";
+import { updateContact } from "../contacts.ts";
+
+export const action = async ({ request, params }) => {
+  const formData = await request.formData();
+  const updates = Object.fromEntries(formData);
+  await updateContact(params.contactId, updates);
+  return redirect(`/contacts/${params.contactId}`);
+};
 
 export const Edit: FC = () => {
   const { contact } = useLoaderData();
