@@ -1,4 +1,5 @@
 import { type FC } from "react";
+import { Outlet } from "react-router-dom";
 
 export const Root: FC = () => {
   return (
@@ -32,7 +33,9 @@ export const Root: FC = () => {
           </ul>
         </nav>
       </div>
-      <div id="detail"></div>
+      <div id="detail">
+        <Outlet />
+      </div>
     </>
   );
 };
