@@ -8,7 +8,7 @@ import {
   Root,
 } from "./routes/root.tsx";
 import { ErrorPage } from "./ErrorPage.tsx";
-import { Contact } from "./routes/Contact.tsx";
+import { Contact, loader as contactLoader } from "./routes/Contact.tsx";
 
 const router = createBrowserRouter([
   {
@@ -17,7 +17,13 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     loader: rootLoader,
     action: rootAction,
-    children: [{ path: "contacts/:contactId", element: <Contact /> }],
+    children: [
+      {
+        path: "contacts/:contactId",
+        element: <Contact />,
+        loader: contactLoader,
+      },
+    ],
   },
 ]);
 

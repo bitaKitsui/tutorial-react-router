@@ -1,17 +1,15 @@
 import { type FC } from "react";
-import { Form } from "react-router-dom";
+import { Form, useLoaderData } from "react-router-dom";
 import { Favorite } from "../Favorite.tsx";
+import { getContact } from "../contacts.ts";
 
-export const contact = {
-  first: "Your",
-  last: "Name",
-  avatar: "https://placekitten.com/g/200/200",
-  twitter: "your_handle",
-  notes: "Some notes",
-  favorite: true,
+export const loader = async ({ params }) => {
+  const contact = await getContact(params.contactId);
+  return { contact };
 };
 
 export const Contact: FC = () => {
+  const { contact } = useLoaderData();
   return (
     <div id="contact">
       <div>
