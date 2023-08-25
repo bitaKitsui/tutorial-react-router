@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { Form, Link, Outlet, useLoaderData } from "react-router-dom";
+import { Form, Link, Outlet, redirect, useLoaderData } from "react-router-dom";
 import { createContact, getContacts } from "../contacts.ts";
 
 export const loader = async () => {
@@ -9,7 +9,7 @@ export const loader = async () => {
 
 export const action = async () => {
   const contact = await createContact();
-  return { contact };
+  return redirect(`/contacts/${contact.id}/edit`);
 };
 
 export const Root: FC = () => {
