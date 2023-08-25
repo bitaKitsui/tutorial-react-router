@@ -1,5 +1,11 @@
 import { type FC } from "react";
-import { Form, Link, Outlet, redirect, useLoaderData } from "react-router-dom";
+import {
+  Form,
+  NavLink,
+  Outlet,
+  redirect,
+  useLoaderData,
+} from "react-router-dom";
 import { createContact, getContacts } from "../contacts.ts";
 
 export const loader = async () => {
@@ -39,7 +45,12 @@ export const Root: FC = () => {
             <ul>
               {contacts.map((contact) => (
                 <li key={contact.id}>
-                  <Link to={`contacts/${contact.id}`}>
+                  <NavLink
+                    to={`contacts/${contact.id}`}
+                    className={({ isActive, isPending }) =>
+                      isActive ? "active" : isPending ? "pending" : ""
+                    }
+                  >
                     {contact.first ?? contact.last ? (
                       <>
                         {contact.first} {contact.last}
@@ -47,7 +58,7 @@ export const Root: FC = () => {
                     ) : (
                       <i>No Name</i>
                     )}{" "}
-                  </Link>
+                  </NavLink>
                 </li>
               ))}
             </ul>
