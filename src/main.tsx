@@ -11,6 +11,7 @@ import { ErrorPage } from "./ErrorPage.tsx";
 import { Contact, loader as contactLoader } from "./routes/Contact.tsx";
 import { Edit, action as editAction } from "./routes/Edit.tsx";
 import { action as destroyAction } from "./routes/Destroy.tsx";
+import { Index } from "./routes";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
     loader: rootLoader,
     action: rootAction,
     children: [
+      { index: true, element: <Index /> },
       {
         path: "contacts/:contactId",
         element: <Contact />,
