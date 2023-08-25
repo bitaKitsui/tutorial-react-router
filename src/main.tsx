@@ -10,6 +10,7 @@ import {
 import { ErrorPage } from "./ErrorPage.tsx";
 import { Contact, loader as contactLoader } from "./routes/Contact.tsx";
 import { Edit, action as editAction } from "./routes/Edit.tsx";
+import { action as destroyAction } from "./routes/Destroy.tsx";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         element: <Edit />,
         loader: contactLoader,
         action: editAction,
+      },
+      {
+        path: "contacts/:contactId/destroy",
+        action: destroyAction,
       },
     ],
   },
