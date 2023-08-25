@@ -1,5 +1,5 @@
 import { type FC } from "react";
-import { Form, redirect, useLoaderData } from "react-router-dom";
+import { Form, redirect, useLoaderData, useNavigate } from "react-router-dom";
 import { updateContact } from "../contacts.ts";
 
 export const action = async ({ request, params }) => {
@@ -11,6 +11,7 @@ export const action = async ({ request, params }) => {
 
 export const Edit: FC = () => {
   const { contact } = useLoaderData();
+  const navigate = useNavigate();
   return (
     <Form method="post" id="contact-form">
       <p>
@@ -55,7 +56,14 @@ export const Edit: FC = () => {
       </label>
       <p>
         <button type="submit">Save</button>
-        <button type="submit">Cancel</button>
+        <button
+          type="button"
+          onClick={() => {
+            navigate(-1);
+          }}
+        >
+          Cancel
+        </button>
       </p>
     </Form>
   );
