@@ -9,7 +9,10 @@ interface Props {
 export const Favorite: FC<Props> = (props) => {
   const fetcher = useFetcher();
   const { contact } = props;
-  const favorite = contact.favorite;
+  let favorite = contact.favorite;
+  if (fetcher.formData) {
+    favorite = fetcher.formData.get("favorite") === "true";
+  }
   return (
     <fetcher.Form method="post">
       <button
@@ -17,7 +20,7 @@ export const Favorite: FC<Props> = (props) => {
         value={favorite ? "false" : "true"}
         aria-label={favorite ? "Remove from favorites" : "Add to favorites"}
       >
-        {favorite ? "⭐️" : "⭐︎"}
+        {favorite ? "⭐️" : "a"}
       </button>
     </fetcher.Form>
   );
