@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import { type FC, useEffect } from "react";
 import {
   Form,
   NavLink,
@@ -13,7 +13,7 @@ export const loader = async ({ request }) => {
   const url = new URL(request.url);
   const q = url.searchParams.get("q");
   const contacts = await getContacts(q);
-  return { contacts };
+  return { contacts, q };
 };
 
 export const action = async () => {
@@ -22,8 +22,11 @@ export const action = async () => {
 };
 
 export const Root: FC = () => {
-  const { contacts } = useLoaderData();
+  const { contacts, q } = useLoaderData();
   const navigation = useNavigation();
+  useEffect(() => {
+    document.getElementById("q").value = q;
+  }, [q]);
   return (
     <>
       <div id="sidebar">
@@ -36,6 +39,7 @@ export const Root: FC = () => {
               aria-label="Search contacts"
               placeholder="Search"
               name="q"
+              defaultValue={q}
             />
             <div id="search-spinner" aria-hidden hidden={true} />
             <div className="sr-only" aria-live="polite"></div>
