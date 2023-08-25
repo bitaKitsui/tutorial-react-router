@@ -9,8 +9,10 @@ import {
 } from "react-router-dom";
 import { createContact, getContacts } from "../contacts.ts";
 
-export const loader = async () => {
-  const contacts = await getContacts();
+export const loader = async ({ request }) => {
+  const url = new URL(request.url);
+  const q = url.searchParams.get("q");
+  const contacts = await getContacts(q);
   return { contacts };
 };
 
@@ -27,7 +29,7 @@ export const Root: FC = () => {
       <div id="sidebar">
         <h1>React Router Contacts</h1>
         <div>
-          <form id="search-form" role="search">
+          <Form id="search-form" role="search">
             <input
               type="search"
               id="q"
@@ -37,7 +39,7 @@ export const Root: FC = () => {
             />
             <div id="search-spinner" aria-hidden hidden={true} />
             <div className="sr-only" aria-live="polite"></div>
-          </form>
+          </Form>
           <Form method="post">
             <button type="submit">New</button>
           </Form>
