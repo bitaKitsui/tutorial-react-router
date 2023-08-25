@@ -8,7 +8,11 @@ import {
   Root,
 } from "./routes/root.tsx";
 import { ErrorPage } from "./ErrorPage.tsx";
-import { Contact, loader as contactLoader } from "./routes/Contact.tsx";
+import {
+  Contact,
+  loader as contactLoader,
+  action as contactAction,
+} from "./routes/Contact.tsx";
 import { Edit, action as editAction } from "./routes/Edit.tsx";
 import { action as destroyAction } from "./routes/Destroy.tsx";
 import { Index } from "./routes";
@@ -26,6 +30,7 @@ const router = createBrowserRouter([
         path: "contacts/:contactId",
         element: <Contact />,
         loader: contactLoader,
+        action: contactAction,
       },
       {
         path: "contacts/:contactId/edit",

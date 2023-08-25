@@ -1,11 +1,18 @@
 import { type FC } from "react";
 import { Form, useLoaderData } from "react-router-dom";
 import { Favorite } from "../Favorite.tsx";
-import { getContact } from "../contacts.ts";
+import { getContact, updateContact } from "../contacts.ts";
 
 export const loader = async ({ params }) => {
   const contact = await getContact(params.contactId);
   return { contact };
+};
+
+export const action = async ({ request, params }) => {
+  const formData = await request.formData();
+  return await updateContact(params.contactId, {
+    favorite: formData.get("favorite") === "true",
+  });
 };
 
 export const Contact: FC = () => {
